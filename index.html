@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tebak Tebakan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #game {
+            display: block;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #333;
+            width: 300px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+    </style>
+    <script>
+        function showAlert() {
+            alert("Selamat datang Nayyara! (iyalah njir kamu doang yang tau link ini)");
+        }
+
+        var personThoughtOf = 'Nayyara'; // Orang yang dipikirkan oleh pacar
+        var attempts = 0;
+
+        function checkGuess() {
+            var guess = document.getElementById('guess').value.trim();
+
+            if (guess === '') {
+                setMessage('Coba tebak orang favoritku');
+                return;
+            }
+
+            attempts++;
+
+            if (guess.toLowerCase() === personThoughtOf.toLowerCase()) {
+                setMessage(`AOWKWKWKWK iyalah njir siapa lagi coba`);
+                showYouTubeLink(); // Panggil fungsi untuk menampilkan link YouTube setelah selesai tebak
+            } else {
+                setMessage(`bukan ${guess} njir. Coba lagi wir.`);
+            }
+        }
+
+        function setMessage(msg) {
+            document.getElementById('message').textContent = msg;
+        }
+
+        function showYouTubeLink() {
+            var gameDiv = document.getElementById('game');
+            var messageP = document.getElementById('message');
+            var videoLink = document.createElement('a');
+            videoLink.href = 'https://www.youtube.com/watch?v=v8ZLaMt89MA&t=19s&ab_channel=Halosehat'; // Ganti URL dengan link YouTube yang Anda inginkan
+            videoLink.textContent = 'sekarang pencet ini';
+            videoLink.target = '_blank'; // Buka link di tab baru
+
+            // Kosongkan isi div game kecuali pesan keberhasilan
+            gameDiv.innerHTML = '';
+            gameDiv.appendChild(messageP);
+            gameDiv.appendChild(videoLink); // Tambahkan link ke dalam div game
+        }
+    </script>
+</head>
+<body onload="showAlert()">
+
+    <div id="game">
+        <h1>Game Tebak Orang favoritku</h1>
+        <p>aku punya orang favorit. Siapakah dia?</p>
+        <input type="text" id="guess" placeholder="Tebak siapa?">
+        <button onclick="checkGuess()">Tebak</button>
+        <p id="message"></p>
+    </div>
+
+</body>
+</html>
